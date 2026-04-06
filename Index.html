@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica Difusa y Clean Architecture</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fondo con patrón de puntos sutil para aspecto tecnológico */
+        body {
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Estilos para las fórmulas matemáticas */
+        .math { 
+            font-family: 'Fira Code', monospace; 
+            font-size: 1.05em; 
+            letter-spacing: 0.05em;
+        }
+        .overline { text-decoration: overline; text-decoration-thickness: 2px; }
+        .chart-container { position: relative; height: 260px; width: 100%; margin-top: 1.5rem; }
+        
+        /* Retrasos escalonados para la animación de entrada de las tarjetas */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        .delay-9 { animation-delay: 0.9s; }
+    </style>
+</head>
+<body class="text-slate-300 font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-white">
+
+    <header class="relative overflow-hidden bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50 py-16 px-6 shadow-2xl">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-full bg-gradient-to-b from-cyan-500/10 to-transparent blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 text-sm font-semibold tracking-wider mb-6">
+                Sistemas Difusos Inteligentes
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400">
+                Lógica Difusa & Clean Architecture
+            </h1>
+            <h2 class="text-xl md:text-2xl font-light text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                Propiedades Válidas para la Detección de <span class="text-cyan-300 font-medium">Vulneraciones</span> en Backend con Embeddings y LLMs
+            </h2>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6">
+        <p class="mb-12 text-lg text-slate-400 text-center max-w-4xl mx-auto font-light leading-relaxed">
+            Exploración interactiva de las operaciones fundamentales de la lógica difusa. Cada propiedad incluye su representación matemática y una <strong class="text-white">visualización generada en tiempo real</strong> aplicada a la clasificación de embeddings arquitectónicos.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-1 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">1. Idempotencia</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">A</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Un conjunto operado consigo mismo no cambia.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Si el LLM analiza un embedding de código y lo clasifica con membresía "Alta" en "Vulneración de Dependencia", re-evaluar este mismo embedding con la unión (Máx) o intersección (Mín) mantiene inalterado su grado.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; A = A</span><span class="mx-3 text-slate-500">|</span><span class="math text-emerald-300">A &cup; A = A</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart1"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-2 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">2. Doble Negación</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">¬</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Negar dos veces un conjunto es lo mismo que el conjunto original.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En el sistema difuso, negar dos veces "No es código infractor" equivale a afirmar directamente que "Es código infractor", garantizando consistencia lógica en los juicios del LLM.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300"><span class="overline"><span class="overline">A</span></span> = A</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart2"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-3 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">3. Conmutativa</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">⟷</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> El orden de los operando no altera el resultado.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Al calcular el grado de vulneración como intersección difusa entre "Inyección Incorrecta" (A) y "Acoplamiento Framework" (B), el resultado es idéntico evaluando primero A y luego B, o viceversa.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; B = B &cap; A</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart3"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-4 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">4. Asociativa</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">()</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Al operar más de dos conjuntos, el agrupamiento no cambia el resultado.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Permite al LLM agrupar vulneraciones por categorías (ej. Dominio y Casos de Uso) y combinarlas con la Capa de Datos de forma flexible, sin que la forma de agrupar altere la puntuación final.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">(A &cup; B) &cup; C = A &cup; (B &cup; C)</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart4"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-5 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">5. Distributiva</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">⨯</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Una operación se puede propagar sobre la otra.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Evaluar (Inyección Incorrecta O Acoplamiento) Y Datos Crudos, es lógicamente equivalente a evaluar (Inyección Y Datos Crudos) O (Acoplamiento Y Datos Crudos).</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; (B &cup; C) = (A &cap; B) &cup; (A &cap; C)</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart5"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-6 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">6. Absorción</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">↓</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Operar un conjunto con la combinación de sí mismo y otro devuelve el original.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Unir una "Vulneración Grave" (A) con la intersección de A y una "Vulneración Menor" (B), resulta en que la vulneración grave absorbe a la menor en el cálculo de membresía.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cup; (A &cap; B) = A</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart6"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-7 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">7. Absorción del Complemento.</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">⤓</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Forma de absorción que involucra al conjunto y su complemento.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Simplifica reglas críticas. Evaluar "Acoplamiento" (A) O ("NO Acoplamiento" Y "Vulneración Inyección" (B)) simplifica a evaluar "Acoplamiento" O "Vulneración Inyección".</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cup; (<span class="overline">A</span> &cap; B) = A &cup; B</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart7"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-8 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">8. Leyes de De Morgan</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">≡</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> El complemento de la unión es la intersección de los complementos.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> El complemento de "Es Acoplamiento O Es Vulneración" equivale a "NO Es Acoplamiento Y NO Es Vulneración". Fundamental para validar "Adherencia a Arquitectura".</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300"><span class="overline">A &cup; B</span> = <span class="overline">A</span> &cap; <span class="overline">B</span></span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart8"></canvas></div>
+            </div>
+
+            <div class="opacity-0 translate-y-5 animate-fade-in-up delay-9 group bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-7 rounded-3xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.3)] hover:border-cyan-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">9. Conjunto Vacío</h3>
+                    <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">∅</div>
+                </div>
+                <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Intersección con un conjunto sin elementos.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En la t-norma estándar (mínimo), intersectar cualquier conjunto de vulneración con el conjunto vacío (membresía 0) resulta exactamente en el conjunto vacío, validando el principio lógico.</p>
+                <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
+                    <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; &phi; = &phi;</span></p>
+                </div>
+                <div class="chart-container"><canvas id="chart9"></canvas></div>
+            </div>
+
+        </div>
+
+        <section class="opacity-0 translate-y-5 animate-fade-in-up delay-9 mt-16 bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl shadow-2xl border-l-4 border-cyan-500">
+            <h2 class="text-2xl font-bold mb-6 text-white flex items-center">
+                <svg class="w-6 h-6 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Referencias Bibliográficas
+            </h2>
+            <ul class="list-none space-y-4 text-slate-400">
+                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
+                    <span class="text-slate-300">Zadeh, L. A. (1965).</span> Fuzzy sets. <em class="text-cyan-100">Information and Control</em>, 8(3), 338-353. <a href="#" class="text-cyan-500 hover:text-cyan-300">https://doi.org/10.1016/S0019-9958(65)90241-X</a>
+                </li>
+                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
+                    <span class="text-slate-300">Ross, T. J. (2010).</span> <em class="text-cyan-100">Fuzzy logic with engineering applications</em> (3ra ed.). John Wiley & Sons.
+                </li>
+                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
+                    <span class="text-slate-300">Martin, R. C. (2017).</span> <em class="text-cyan-100">Clean Architecture: A Craftsman's Guide to Software Structure and Design</em>. Prentice Hall.
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 text-slate-500 text-center py-8 mt-12">
+        <p class="mb-2 tracking-wide text-sm">Desarrollado por Ing. Erik Olmos</p><p>Maestría en Inteligencia Artificial</p>
+        <p class="font-bold text-slate-300 tracking-wider">TECNOLÓGICO NACIONAL DE MÉXICO campus Zacapoaxtla</p>
+    </footer>
+
+    <script>
+        // Configuración Global de Chart.js para Modo Oscuro
+        Chart.defaults.color = '#94a3b8'; // Texto gris azulado claro
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.03)'; // Cuadrícula súper sutil
+        
+        // 1. Universo de Discurso (x = 0 a 10)
+        const labels = Array.from({length: 101}, (_, i) => i / 10);
+
+        // 2. Función Triangular
+        function triMF(x, a, b, c) {
+            if (x <= a || x >= c) return 0;
+            if (x === b) return 1;
+            if (x < b) return (x - a) / (b - a);
+            return (c - x) / (c - b);
+        }
+
+        // 3. Conjuntos Base
+        const A = labels.map(x => triMF(x, 2, 5, 8)); 
+        const B = labels.map(x => triMF(x, 4, 7, 10)); 
+        const C = labels.map(x => triMF(x, 1, 3, 6)); 
+        const vacio = labels.map(() => 0); 
+
+        // 4. Operadores Difusos
+        const fuzzyNot = (arr) => arr.map(val => 1 - val);
+        const fuzzyOr = (arr1, arr2) => arr1.map((val, i) => Math.max(val, arr2[i]));
+        const fuzzyAnd = (arr1, arr2) => arr1.map((val, i) => Math.min(val, arr2[i]));
+
+        // 5. Paleta de Colores Tecnológica (Neón suave)
+        const cianFluo = 'rgba(34, 211, 238, 1)';
+        const cianFill = 'rgba(34, 211, 238, 0.15)';
+        
+        const purpuraFluo = 'rgba(168, 85, 247, 1)';
+        const purpuraFill = 'rgba(168, 85, 247, 0.15)';
+        
+        const esmeraldaFluo = 'rgba(16, 185, 129, 1)';
+        
+        const resLine = 'rgba(255, 255, 255, 0.9)'; // Resultado en blanco brillante
+        const resFill = 'rgba(255, 255, 255, 0.08)';
+
+        function createChart(id, datasetsData) {
+            new Chart(document.getElementById(id), {
+                type: 'line',
+                data: { labels: labels, datasets: datasetsData },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { boxWidth: 12, usePointStyle: true } }
+                    },
+                    scales: { 
+                        x: { display: false }, 
+                        y: { min: 0, max: 1.1, border: {display: false}, ticks: {stepSize: 0.5} } 
+                    },
+                    elements: { point: { radius: 0, hitRadius: 10 }, line: { tension: 0.3 } }, // Curvas más suaves
+                    interaction: { mode: 'index', intersect: false }
+                }
+            });
+        }
+
+        window.onload = function() {
+            // 1. Idempotencia
+            createChart('chart1', [
+                { label: 'Conjunto A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: 'Resultado (A ∪ A)', data: fuzzyOr(A, A), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
+            ]);
+
+            // 2. Doble Negación
+            const notA = fuzzyNot(A);
+            createChart('chart2', [
+                { label: 'Conj. A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: '¬A', data: notA, borderColor: 'rgba(244, 63, 94, 0.7)', borderDash: [2, 2], borderWidth: 1 },
+                { label: '¬(¬A)', data: fuzzyNot(notA), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
+            ]);
+
+            // 3. Conmutativa
+            createChart('chart3', [
+                { label: 'Conj. A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: 'Conj. B', data: B, borderColor: purpuraFluo, backgroundColor: purpuraFill, fill: true, borderWidth: 2 },
+                { label: 'A ∩ B', data: fuzzyAnd(A, B), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
+            ]);
+
+            // 4. Asociativa
+            createChart('chart4', [
+                { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
+                { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
+                { label: 'C', data: C, borderColor: esmeraldaFluo, borderWidth: 1.5 },
+                { label: 'A ∪ (B ∪ C)', data: fuzzyOr(A, fuzzyOr(B, C)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
+            ]);
+
+            // 5. Distributiva
+            createChart('chart5', [
+                { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
+                { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
+                { label: 'C', data: C, borderColor: esmeraldaFluo, borderWidth: 1.5 },
+                { label: 'A ∩ (B ∪ C)', data: fuzzyAnd(A, fuzzyOr(B, C)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
+            ]);
+
+            // 6. Absorción
+            createChart('chart6', [
+                { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
+                { label: 'A ∪ (A ∩ B)', data: fuzzyOr(A, fuzzyAnd(A, B)), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
+            ]);
+
+            // 7. Absorción Comp.
+            createChart('chart7', [
+                { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: 'B', data: B, borderColor: purpuraFluo, backgroundColor: purpuraFill, fill: true, borderWidth: 2 },
+                { label: 'A ∪ (¬A ∩ B)', data: fuzzyOr(A, fuzzyAnd(fuzzyNot(A), B)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
+            ]);
+
+            // 8. De Morgan
+            createChart('chart8', [
+                { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
+                { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
+                { label: '¬(A ∪ B)', data: fuzzyNot(fuzzyOr(A, B)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
+            ]);
+
+            // 9. Vacío
+            createChart('chart9', [
+                { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
+                { label: '∅', data: vacio, borderColor: 'rgba(255,255,255,0.2)', borderWidth: 1 },
+                { label: 'A ∩ ∅', data: fuzzyAnd(A, vacio), borderColor: resLine, borderWidth: 3 }
+            ]);
+        };
+    </script>
+</body>
+</html>
