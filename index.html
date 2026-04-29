@@ -42,20 +42,15 @@
             background-size: 24px 24px;
         }
         
-        /* Estilos para las fórmulas matemáticas */
-        .math { 
-            font-family: 'Fira Code', monospace; 
-            font-size: 1.05em; 
-            letter-spacing: 0.05em;
-        }
+        .math { font-family: 'Fira Code', monospace; font-size: 1.05em; letter-spacing: 0.05em; }
         .overline { text-decoration: overline; text-decoration-thickness: 2px; }
         .chart-container { position: relative; height: 260px; width: 100%; margin-top: 1.5rem; }
 
-        /* Clases para el despliegue de objetivos */
-        .content-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .content-show { max-height: 2000px; opacity: 1; margin-bottom: 4rem; }
+        /* Clases para el despliegue de los módulos */
+        .content-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); margin-top: 0; margin-bottom: 0;}
+        .content-show { max-height: 2500px; opacity: 1; margin-top: 2rem; margin-bottom: 4rem; }
         
-        /* Retrasos escalonados para la animación de entrada de las tarjetas */
+        /* Retrasos escalonados para la animación */
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
@@ -83,16 +78,21 @@
                 Propiedades Válidas para la Detección de <span class="text-cyan-300 font-medium">Inconsistencias</span> en Backend con Embeddings y LLMs
             </h2>
 
-            <div class="mt-10">
-                <button onclick="toggleObjectives()" id="btn-toggle" class="group relative inline-flex items-center justify-center px-8 py-3 font-semibold text-white transition-all duration-300 bg-cyan-600 rounded-full hover:bg-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.3)] hover:shadow-[0_0_30px_rgba(8,145,178,0.6)]">
-                    <span id="btn-text">Ver Fundamentación del Proyecto</span>
-                    <svg id="btn-icon" class="w-5 h-5 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="toggleSection('objectives-container', 'btn-text-obj', 'btn-icon-obj', 'Ver Objetivos del Proyecto')" class="group relative inline-flex items-center justify-center px-6 py-3 font-semibold text-white transition-all duration-300 bg-cyan-600 rounded-full hover:bg-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.3)] hover:shadow-[0_0_30px_rgba(8,145,178,0.6)]">
+                    <span id="btn-text-obj">Ver Objetivos del Proyecto</span>
+                    <svg id="btn-icon-obj" class="w-5 h-5 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+
+                <button onclick="toggleSection('problem-container', 'btn-text-prob', 'btn-icon-prob', 'Ver Problemática y Justificación')" class="group relative inline-flex items-center justify-center px-6 py-3 font-semibold text-cyan-400 transition-all duration-300 bg-transparent border border-cyan-600 rounded-full hover:bg-cyan-900/30 shadow-[0_0_15px_rgba(8,145,178,0.15)] hover:shadow-[0_0_25px_rgba(8,145,178,0.4)]">
+                    <span id="btn-text-prob">Ver Problemática y Justificación</span>
+                    <svg id="btn-icon-prob" class="w-5 h-5 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6">
+    <main class="max-w-7xl mx-auto py-4 px-4 sm:px-6">
 
         <div id="objectives-container" class="content-hidden">
             <section class="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-8 md:p-10 rounded-3xl shadow-xl relative overflow-hidden transition-all duration-300 border-cyan-500/20">
@@ -100,7 +100,7 @@
 
                 <h2 class="text-3xl font-bold text-white mb-8 border-b border-slate-700/50 pb-4 inline-flex items-center">
                     <svg class="w-8 h-8 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Fundamentación del Proyecto
+                    Objetivos del Proyecto
                 </h2>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
@@ -123,13 +123,13 @@
                             <li class="flex items-start">
                                 <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-cyan-400 font-mono text-sm mt-0.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">2</div>
                                 <p class="ml-4 text-slate-400 text-sm md:text-base leading-relaxed text-justify">
-                                    <strong class="text-slate-200">Análisis de Inconsistencias:</strong> Diseñar un motor de inferencia que utilice la capacidad de razonamiento de los LLMs para contrastar el código implementado contra los patrones arquitectónicos definidos, identificando desviaciones técnicas.
+                                    <strong class="text-slate-200">Análisis de Inconsistencias:</strong> Diseñar un motor de inferencia que utilice la capacidad de razonamiento de los LLMs para contrastar el código implementado contra los patrones arquitectónicos definidos.
                                 </p>
                             </li>
                             <li class="flex items-start">
                                 <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-cyan-400 font-mono text-sm mt-0.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">3</div>
                                 <p class="ml-4 text-slate-400 text-sm md:text-base leading-relaxed text-justify">
-                                    <strong class="text-slate-200">Validación de Resultados:</strong> Evaluar la efectividad del sistema mediante pruebas en repositorios reales, midiendo su precisión en la identificación de inconsistencias y su utilidad en procesos de auditoría de código.
+                                    <strong class="text-slate-200">Validación de Resultados:</strong> Evaluar la efectividad del sistema mediante pruebas en repositorios reales, midiendo su precisión y utilidad en procesos de auditoría de código.
                                 </p>
                             </li>
                         </ul>
@@ -138,7 +138,43 @@
             </section>
         </div>
 
-        <p class="mb-12 text-lg text-slate-400 text-center max-w-4xl mx-auto font-light leading-relaxed">
+        <div id="problem-container" class="content-hidden">
+            <section class="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-8 md:p-10 rounded-3xl shadow-xl relative overflow-hidden transition-all duration-300 border-cyan-500/20">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <h2 class="text-3xl font-bold text-white mb-8 border-b border-slate-700/50 pb-4 inline-flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Planteamiento del Proyecto
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                    <div class="bg-slate-900/40 rounded-2xl p-6 border border-slate-700/50">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4 tracking-wide flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
+                            Problemática
+                        </h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed text-justify font-light">
+                            En el ciclo de vida del desarrollo de software backend, la evolución continua y la presión por liberar nuevas funcionalidades frecuentemente provocan una degradación progresiva del diseño original. Este fenómeno dificulta la identificación manual de <strong class="text-cyan-300 font-medium">inconsistencias arquitectónicas</strong>, ya que las herramientas de análisis estático tradicionales se limitan a reglas rígidas (sintaxis) y carecen de comprensión semántica profunda. Como resultado, el código acumula deuda técnica severa, lo que incrementa exponencialmente los costos de mantenimiento, dificulta la escalabilidad y compromete la integridad estructural del sistema.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/60 rounded-2xl p-6 border-l-4 border-cyan-500 shadow-inner">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4 tracking-wide flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
+                            Justificación
+                        </h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed text-justify font-light mb-4">
+                            La implementación de un sistema de auditoría automatizado apoyado en Inteligencia Artificial resulta imperativa. Según <strong class="text-white font-semibold">Martin (2017)</strong>, mantener una arquitectura limpia con fronteras bien definidas es el factor primordial para prolongar la vida útil del software y minimizar el esfuerzo humano en su desarrollo. Sin embargo, verificar estas reglas en bases de código extensas resulta humanamente inviable.
+                        </p>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed text-justify font-light">
+                            Adicionalmente, tal como señala <strong class="text-white font-semibold">Fowler (2002)</strong> respecto a la enorme complejidad de gestionar la lógica de dominio en aplicaciones empresariales, es vital contar con mecanismos que eviten el acoplamiento destructivo. La integración de LLMs y <em>embeddings</em> ofrece esta solución, trascendiendo el análisis superficial al permitir una comprensión contextual de las dependencias, facilitando la detección de inconsistencias antes de que se arraiguen en el núcleo del sistema.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <p class="mt-8 mb-12 text-lg text-slate-400 text-center max-w-4xl mx-auto font-light leading-relaxed">
             Exploración interactiva de las operaciones fundamentales de la lógica difusa. Cada propiedad incluye su representación matemática y una <strong class="text-white">visualización generada en tiempo real</strong> aplicada a la clasificación de embeddings arquitectónicos.
         </p>
 
@@ -270,13 +306,16 @@
             </h2>
             <ul class="list-none space-y-4 text-slate-400">
                 <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
-                    <span class="text-slate-300">Zadeh, L. A. (1965).</span> Fuzzy sets. <em class="text-cyan-100">Information and Control</em>, 8(3), 338-353. <a href="#" class="text-cyan-500 hover:text-cyan-300">https://doi.org/10.1016/S0019-9958(65)90241-X</a>
-                </li>
-                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
-                    <span class="text-slate-300">Ross, T. J. (2010).</span> <em class="text-cyan-100">Fuzzy logic with engineering applications</em> (3ra ed.). John Wiley & Sons.
+                    <span class="text-slate-300">Zadeh, L. A. (1965).</span> Fuzzy sets. <em class="text-cyan-100">Information and Control</em>, 8(3), 338-353. 
                 </li>
                 <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
                     <span class="text-slate-300">Martin, R. C. (2017).</span> <em class="text-cyan-100">Clean Architecture: A Craftsman's Guide to Software Structure and Design</em>. Prentice Hall.
+                </li>
+                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
+                    <span class="text-slate-300">Fowler, M. (2002).</span> <em class="text-cyan-100">Patterns of Enterprise Application Architecture</em>. Addison-Wesley.
+                </li>
+                <li class="pl-4 border-l border-slate-600 hover:border-cyan-400 transition-colors">
+                    <span class="text-slate-300">Ross, T. J. (2010).</span> <em class="text-cyan-100">Fuzzy logic with engineering applications</em> (3ra ed.). John Wiley & Sons.
                 </li>
             </ul>
         </section>
@@ -288,21 +327,21 @@
     </footer>
 
     <script>
-        // Lógica para desplegar/contraer objetivos
-        function toggleObjectives() {
-            const container = document.getElementById('objectives-container');
-            const btnText = document.getElementById('btn-text');
-            const btnIcon = document.getElementById('btn-icon');
+        // Lógica unificada para desplegar/contraer secciones de forma independiente
+        function toggleSection(containerId, btnTextId, btnIconId, defaultText) {
+            const container = document.getElementById(containerId);
+            const btnText = document.getElementById(btnTextId);
+            const btnIcon = document.getElementById(btnIconId);
             
             if (container.classList.contains('content-show')) {
                 container.classList.remove('content-show');
-                btnText.innerText = "Ver Fundamentación del Proyecto";
+                btnText.innerText = defaultText;
                 btnIcon.style.transform = "rotate(0deg)";
             } else {
                 container.classList.add('content-show');
-                btnText.innerText = "Ocultar Fundamentación";
+                btnText.innerText = "Ocultar Módulo";
                 btnIcon.style.transform = "rotate(180deg)";
-                // Scroll suave hacia la sección
+                // Scroll suave hacia la sección abierta
                 setTimeout(() => {
                     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
@@ -310,14 +349,12 @@
         }
 
         // Configuración Global de Chart.js para Modo Oscuro
-        Chart.defaults.color = '#94a3b8'; // Texto gris azulado claro
+        Chart.defaults.color = '#94a3b8';
         Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.03)'; // Cuadrícula súper sutil
+        Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.03)';
         
-        // 1. Universo de Discurso (x = 0 a 10)
         const labels = Array.from({length: 101}, (_, i) => i / 10);
 
-        // 2. Función Triangular
         function triMF(x, a, b, c) {
             if (x <= a || x >= c) return 0;
             if (x === b) return 1;
@@ -325,27 +362,21 @@
             return (c - x) / (c - b);
         }
 
-        // 3. Conjuntos Base
         const A = labels.map(x => triMF(x, 2, 5, 8)); 
         const B = labels.map(x => triMF(x, 4, 7, 10)); 
         const C = labels.map(x => triMF(x, 1, 3, 6)); 
         const vacio = labels.map(() => 0); 
 
-        // 4. Operadores Difusos
         const fuzzyNot = (arr) => arr.map(val => 1 - val);
         const fuzzyOr = (arr1, arr2) => arr1.map((val, i) => Math.max(val, arr2[i]));
         const fuzzyAnd = (arr1, arr2) => arr1.map((val, i) => Math.min(val, arr2[i]));
 
-        // 5. Paleta de Colores Tecnológica (Neón suave)
         const cianFluo = 'rgba(34, 211, 238, 1)';
         const cianFill = 'rgba(34, 211, 238, 0.15)';
-        
         const purpuraFluo = 'rgba(168, 85, 247, 1)';
         const purpuraFill = 'rgba(168, 85, 247, 0.15)';
-        
         const esmeraldaFluo = 'rgba(16, 185, 129, 1)';
-        
-        const resLine = 'rgba(255, 255, 255, 0.9)'; // Resultado en blanco brillante
+        const resLine = 'rgba(255, 255, 255, 0.9)'; 
         const resFill = 'rgba(255, 255, 255, 0.08)';
 
         function createChart(id, datasetsData) {
@@ -361,20 +392,18 @@
                         x: { display: false }, 
                         y: { min: 0, max: 1.1, border: {display: false}, ticks: {stepSize: 0.5} } 
                     },
-                    elements: { point: { radius: 0, hitRadius: 10 }, line: { tension: 0.3 } }, // Curvas más suaves
+                    elements: { point: { radius: 0, hitRadius: 10 }, line: { tension: 0.3 } },
                     interaction: { mode: 'index', intersect: false }
                 }
             });
         }
 
         window.onload = function() {
-            // 1. Idempotencia
             createChart('chart1', [
                 { label: 'Conjunto A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
                 { label: 'Resultado (A ∪ A)', data: fuzzyOr(A, A), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
             ]);
 
-            // 2. Doble Negación
             const notA = fuzzyNot(A);
             createChart('chart2', [
                 { label: 'Conj. A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
@@ -382,14 +411,12 @@
                 { label: '¬(¬A)', data: fuzzyNot(notA), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
             ]);
 
-            // 3. Conmutativa
             createChart('chart3', [
                 { label: 'Conj. A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
                 { label: 'Conj. B', data: B, borderColor: purpuraFluo, backgroundColor: purpuraFill, fill: true, borderWidth: 2 },
                 { label: 'A ∩ B', data: fuzzyAnd(A, B), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
             ]);
 
-            // 4. Asociativa
             createChart('chart4', [
                 { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
                 { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
@@ -397,7 +424,6 @@
                 { label: 'A ∪ (B ∪ C)', data: fuzzyOr(A, fuzzyOr(B, C)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
             ]);
 
-            // 5. Distributiva
             createChart('chart5', [
                 { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
                 { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
@@ -405,28 +431,24 @@
                 { label: 'A ∩ (B ∪ C)', data: fuzzyAnd(A, fuzzyOr(B, C)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
             ]);
 
-            // 6. Absorción
             createChart('chart6', [
                 { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
                 { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
                 { label: 'A ∪ (A ∩ B)', data: fuzzyOr(A, fuzzyAnd(A, B)), borderColor: resLine, borderDash: [4, 4], borderWidth: 3 }
             ]);
 
-            // 7. Absorción Comp.
             createChart('chart7', [
                 { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
                 { label: 'B', data: B, borderColor: purpuraFluo, backgroundColor: purpuraFill, fill: true, borderWidth: 2 },
                 { label: 'A ∪ (¬A ∩ B)', data: fuzzyOr(A, fuzzyAnd(fuzzyNot(A), B)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
             ]);
 
-            // 8. De Morgan
             createChart('chart8', [
                 { label: 'A', data: A, borderColor: cianFluo, borderWidth: 1.5 },
                 { label: 'B', data: B, borderColor: purpuraFluo, borderWidth: 1.5 },
                 { label: '¬(A ∪ B)', data: fuzzyNot(fuzzyOr(A, B)), borderColor: resLine, backgroundColor: resFill, fill: true, borderWidth: 3 }
             ]);
 
-            // 9. Vacío
             createChart('chart9', [
                 { label: 'A', data: A, borderColor: cianFluo, backgroundColor: cianFill, fill: true, borderWidth: 2 },
                 { label: '∅', data: vacio, borderColor: 'rgba(255,255,255,0.2)', borderWidth: 1 },
