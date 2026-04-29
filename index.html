@@ -50,6 +50,10 @@
         }
         .overline { text-decoration: overline; text-decoration-thickness: 2px; }
         .chart-container { position: relative; height: 260px; width: 100%; margin-top: 1.5rem; }
+
+        /* Clases para el despliegue de objetivos */
+        .content-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .content-show { max-height: 2000px; opacity: 1; margin-bottom: 4rem; }
         
         /* Retrasos escalonados para la animación de entrada de las tarjetas */
         .delay-1 { animation-delay: 0.1s; }
@@ -76,12 +80,64 @@
                 Lógica Difusa & Clean Architecture
             </h1>
             <h2 class="text-xl md:text-2xl font-light text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                Propiedades Válidas para la Detección de <span class="text-cyan-300 font-medium">Vulneraciones</span> en Backend con Embeddings y LLMs
+                Propiedades Válidas para la Detección de <span class="text-cyan-300 font-medium">Inconsistencias</span> en Backend con Embeddings y LLMs
             </h2>
+
+            <div class="mt-10">
+                <button onclick="toggleObjectives()" id="btn-toggle" class="group relative inline-flex items-center justify-center px-8 py-3 font-semibold text-white transition-all duration-300 bg-cyan-600 rounded-full hover:bg-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.3)] hover:shadow-[0_0_30px_rgba(8,145,178,0.6)]">
+                    <span id="btn-text">Ver Fundamentación del Proyecto</span>
+                    <svg id="btn-icon" class="w-5 h-5 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6">
+
+        <div id="objectives-container" class="content-hidden">
+            <section class="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-8 md:p-10 rounded-3xl shadow-xl relative overflow-hidden transition-all duration-300 border-cyan-500/20">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <h2 class="text-3xl font-bold text-white mb-8 border-b border-slate-700/50 pb-4 inline-flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Fundamentación del Proyecto
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+                    <div class="lg:col-span-5 bg-slate-900/60 rounded-2xl p-6 border-l-4 border-cyan-500 shadow-inner">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4 tracking-wide">Objetivo General</h3>
+                        <p class="text-slate-300 leading-relaxed italic text-justify font-light">
+                            "Desarrollar un sistema automatizado basado en Modelos de Lenguaje de Gran Escala (LLMs) y representaciones vectoriales (embeddings) de código fuente, diseñado para la detección de <strong class="text-cyan-300 font-medium">inconsistencias</strong> arquitectónicas en entornos de desarrollo backend, con el fin de fortalecer la integridad estructural y la calidad del software."
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-slate-900/40 rounded-2xl p-6 border border-slate-700/50">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-5 tracking-wide">Objetivos Específicos</h3>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-cyan-400 font-mono text-sm mt-0.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">1</div>
+                                <p class="ml-4 text-slate-400 text-sm md:text-base leading-relaxed text-justify">
+                                    <strong class="text-slate-200">Extracción de Conocimiento:</strong> Implementar procesos de preprocesamiento de código fuente para generar embeddings semánticos que representen con precisión la lógica y estructura de los servicios backend.
+                                </p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-cyan-400 font-mono text-sm mt-0.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">2</div>
+                                <p class="ml-4 text-slate-400 text-sm md:text-base leading-relaxed text-justify">
+                                    <strong class="text-slate-200">Análisis de Inconsistencias:</strong> Diseñar un motor de inferencia que utilice la capacidad de razonamiento de los LLMs para contrastar el código implementado contra los patrones arquitectónicos definidos, identificando desviaciones técnicas.
+                                </p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-cyan-400 font-mono text-sm mt-0.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">3</div>
+                                <p class="ml-4 text-slate-400 text-sm md:text-base leading-relaxed text-justify">
+                                    <strong class="text-slate-200">Validación de Resultados:</strong> Evaluar la efectividad del sistema mediante pruebas en repositorios reales, midiendo su precisión en la identificación de inconsistencias y su utilidad en procesos de auditoría de código.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <p class="mb-12 text-lg text-slate-400 text-center max-w-4xl mx-auto font-light leading-relaxed">
             Exploración interactiva de las operaciones fundamentales de la lógica difusa. Cada propiedad incluye su representación matemática y una <strong class="text-white">visualización generada en tiempo real</strong> aplicada a la clasificación de embeddings arquitectónicos.
         </p>
@@ -94,7 +150,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">A</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Un conjunto operado consigo mismo no cambia.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Si el LLM analiza un embedding de código y lo clasifica con membresía "Alta" en "Vulneración de Dependencia", re-evaluar este mismo embedding con la unión (Máx) o intersección (Mín) mantiene inalterado su grado.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Si el LLM analiza un embedding de código y lo clasifica con membresía "Alta" en "Inconsistencia de Dependencia", re-evaluar este mismo embedding con la unión (Máx) o intersección (Mín) mantiene inalterado su grado.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; A = A</span><span class="mx-3 text-slate-500">|</span><span class="math text-emerald-300">A &cup; A = A</span></p>
                 </div>
@@ -107,7 +163,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">¬</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Negar dos veces un conjunto es lo mismo que el conjunto original.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En el sistema difuso, negar dos veces "No es código infractor" equivale a afirmar directamente que "Es código infractor", garantizando consistencia lógica en los juicios del LLM.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En el sistema difuso, negar dos veces "No es código inconsistente" equivale a afirmar directamente que "Es código inconsistente", garantizando consistencia lógica en los juicios del LLM.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300"><span class="overline"><span class="overline">A</span></span> = A</span></p>
                 </div>
@@ -120,7 +176,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">⟷</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> El orden de los operando no altera el resultado.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Al calcular el grado de vulneración como intersección difusa entre "Inyección Incorrecta" (A) y "Acoplamiento Framework" (B), el resultado es idéntico evaluando primero A y luego B, o viceversa.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Al calcular el grado de inconsistencia como intersección difusa entre "Inyección Incorrecta" (A) y "Acoplamiento Framework" (B), el resultado es idéntico evaluando primero A y luego B, o viceversa.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; B = B &cap; A</span></p>
                 </div>
@@ -133,7 +189,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">()</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Al operar más de dos conjuntos, el agrupamiento no cambia el resultado.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Permite al LLM agrupar vulneraciones por categorías (ej. Dominio y Casos de Uso) y combinarlas con la Capa de Datos de forma flexible, sin que la forma de agrupar altere la puntuación final.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Permite al LLM agrupar inconsistencias por categorías (ej. Dominio y Casos de Uso) y combinarlas con la Capa de Datos de forma flexible, sin que la forma de agrupar altere la puntuación final.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">(A &cup; B) &cup; C = A &cup; (B &cup; C)</span></p>
                 </div>
@@ -159,7 +215,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">↓</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Operar un conjunto con la combinación de sí mismo y otro devuelve el original.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Unir una "Vulneración Grave" (A) con la intersección de A y una "Vulneración Menor" (B), resulta en que la vulneración grave absorbe a la menor en el cálculo de membresía.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Unir una "Inconsistencia Grave" (A) con la intersección de A y una "Inconsistencia Menor" (B), resulta en que la inconsistencia grave absorbe a la menor en el cálculo de membresía.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cup; (A &cap; B) = A</span></p>
                 </div>
@@ -172,7 +228,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">⤓</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Forma de absorción que involucra al conjunto y su complemento.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Simplifica reglas críticas. Evaluar "Acoplamiento" (A) O ("NO Acoplamiento" Y "Vulneración Inyección" (B)) simplifica a evaluar "Acoplamiento" O "Vulneración Inyección".</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> Simplifica reglas críticas. Evaluar "Acoplamiento" (A) O ("NO Acoplamiento" Y "Inconsistencia por Inyección" (B)) simplifica a evaluar "Acoplamiento" O "Inconsistencia por Inyección".</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cup; (<span class="overline">A</span> &cap; B) = A &cup; B</span></p>
                 </div>
@@ -185,7 +241,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">≡</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> El complemento de la unión es la intersección de los complementos.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> El complemento de "Es Acoplamiento O Es Vulneración" equivale a "NO Es Acoplamiento Y NO Es Vulneración". Fundamental para validar "Adherencia a Arquitectura".</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> El complemento de "Es Acoplamiento O Es Inconsistencia" equivale a "NO Es Acoplamiento Y NO Es Inconsistencia". Fundamental para validar "Adherencia a Arquitectura".</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300"><span class="overline">A &cup; B</span> = <span class="overline">A</span> &cap; <span class="overline">B</span></span></p>
                 </div>
@@ -198,7 +254,7 @@
                     <div class="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center text-cyan-400 text-sm font-mono border border-slate-600">∅</div>
                 </div>
                 <p class="mb-3 text-sm"><strong class="text-slate-200">Definición:</strong> Intersección con un conjunto sin elementos.</p>
-                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En la t-norma estándar (mínimo), intersectar cualquier conjunto de vulneración con el conjunto vacío (membresía 0) resulta exactamente en el conjunto vacío, validando el principio lógico.</p>
+                <p class="mb-4 text-sm text-justify text-slate-400 leading-relaxed"><strong class="text-slate-200">Descripción Textual:</strong> En la t-norma estándar (mínimo), intersectar cualquier conjunto de inconsistencia con el conjunto vacío (membresía 0) resulta exactamente en el conjunto vacío, validando el principio lógico.</p>
                 <div class="bg-slate-900/50 rounded-xl p-3 border border-slate-700/50 inline-block mb-2">
                     <p class="text-sm"><strong class="text-cyan-500">Matemática:</strong> <span class="math text-emerald-300">A &cap; &phi; = &phi;</span></p>
                 </div>
@@ -232,6 +288,27 @@
     </footer>
 
     <script>
+        // Lógica para desplegar/contraer objetivos
+        function toggleObjectives() {
+            const container = document.getElementById('objectives-container');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            
+            if (container.classList.contains('content-show')) {
+                container.classList.remove('content-show');
+                btnText.innerText = "Ver Fundamentación del Proyecto";
+                btnIcon.style.transform = "rotate(0deg)";
+            } else {
+                container.classList.add('content-show');
+                btnText.innerText = "Ocultar Fundamentación";
+                btnIcon.style.transform = "rotate(180deg)";
+                // Scroll suave hacia la sección
+                setTimeout(() => {
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+
         // Configuración Global de Chart.js para Modo Oscuro
         Chart.defaults.color = '#94a3b8'; // Texto gris azulado claro
         Chart.defaults.font.family = "'Inter', sans-serif";
